@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Task extends Equatable {
+
   final String title;
   bool? isDone;
   bool? isDeleted;
@@ -39,7 +40,6 @@ class Task extends Equatable {
   }
 
   @override
-
   List<Object?> get props => [
     title,
     isDone,
