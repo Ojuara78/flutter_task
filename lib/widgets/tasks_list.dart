@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tasks_bloc/blocs/block_exports.dart';
-
 import '../models/task.dart';
 
 class TasksList extends StatelessWidget {
@@ -23,6 +22,7 @@ class TasksList extends StatelessWidget {
                 context.read<TasksBloc>().add(UpdateTask(task: task));
               },
             ),
+            onLongPress: () => context.read<TasksBloc>().add(DeleteTask(task: task)),
           );
         },
       ),

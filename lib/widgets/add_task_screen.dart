@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasks_bloc/services/guid_gen.dart';
 
 import '../blocs/bloc/tasks_bloc.dart';
 import '../models/task.dart';
@@ -40,7 +41,10 @@ class AddTaskScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  var task = Task(title: titleController.text);
+                  var task = Task(
+                    title: titleController.text,
+                    id: GUIDGen.generate(),
+                  );
                   context.read<TasksBloc>().add(AddTask(task: task));
                   Navigator.pop(context);
                 },
