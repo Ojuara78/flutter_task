@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tasks_bloc/screen/tasks_screen.dart';
 import 'package:tasks_bloc/blocs/block_exports.dart';
+import 'package:tasks_bloc/services/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
 
-  HydratedBlocOverrides.runZoned(() => runApp(const MyApp()), storage: storage,
+  HydratedBlocOverrides.runZoned(() => runApp(MyApp(appRouter: AppRouter(),)), storage: storage,
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key, required this.appRouter}) : super(key: key);
 
+  final AppRouter appRouter;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: TasksScreen(),
+        home: const TasksScreen(),
+        onGenerateRoute: appRouter.onGenerateRoute,
       ),
     );
   }

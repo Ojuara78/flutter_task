@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:tasks_bloc/screen/drawer_screen.dart';
 import 'package:tasks_bloc/widgets/add_task_screen.dart';
 import 'package:tasks_bloc/widgets/tasks_list.dart';
 
 import '../blocs/block_exports.dart';
 import '../models/task.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
   const TasksScreen({Key? key}) : super(key: key);
 
+  static const id = 'tasks_screen';
+
+  @override
+  State<TasksScreen> createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
   _addTask(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -31,18 +39,19 @@ class TasksScreen extends StatelessWidget {
             title: const Text('Tasks App'),
             actions: [
               IconButton(
-                onPressed: ()=> _addTask(context),
+                onPressed: () => _addTask(context),
                 icon: const Icon(Icons.add),
               )
             ],
           ),
+          drawer: DrawerScreen(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Center(
+              Center(
                 child: Chip(
                   label: Text(
-                    'Tasks:',
+                    '${state.allTasks.length} Tasks',
                   ),
                 ),
               ),

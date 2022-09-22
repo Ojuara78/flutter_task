@@ -7,6 +7,12 @@ class TasksList extends StatelessWidget {
 
   final List<Task> tasksList;
 
+  void _removeOrDeleteTask(BuildContext context, Task task) {
+    task.isDeleted!
+        ? context.read<TasksBloc>().add(DeleteTask(task: task))
+        : context.read<TasksBloc>().add(RemoveTask(task: task));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -15,14 +21,20 @@ class TasksList extends StatelessWidget {
         itemBuilder: (context, index) {
           var task = tasksList[index];
           return ListTile(
-            title: Text(task.title),
+            title: Text(
+              task.title,
+              style: TextStyle(
+                  decoration: task.isDone! ? TextDecoration.lineThrough : null),
+            ),
             trailing: Checkbox(
               value: task.isDone,
-              onChanged: (value) {
-                context.read<TasksBloc>().add(UpdateTask(task: task));
-              },
+              onChanged: task.isDeleted == false
+                  ? (value) {
+                      context.read<TasksBloc>().add(UpdateTask(task: task));
+                    }
+                  : null,
             ),
-            onLongPress: () => context.read<TasksBloc>().add(DeleteTask(task: task)),
+            onLongPress: () => _removeOrDeleteTask(context, task),
           );
         },
       ),
