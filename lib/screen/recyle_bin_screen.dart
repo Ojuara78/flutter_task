@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import '../blocs/bloc/tasks_bloc.dart';
 import '../blocs/block_exports.dart';
 import '../widgets/tasks_list.dart';
 import 'drawer_screen.dart';
@@ -24,7 +22,7 @@ class RecycleBinScreen extends StatelessWidget {
               )
             ],
           ),
-          drawer: const DrawerScreen(),
+          drawer: DrawerScreen(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

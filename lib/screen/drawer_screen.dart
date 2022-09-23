@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:tasks_bloc/screen/recyle_bin_screen.dart';
 import 'package:tasks_bloc/screen/tasks_screen.dart';
 
-import '../blocs/bloc/tasks_bloc.dart';
 import '../blocs/block_exports.dart';
 
 class DrawerScreen extends StatelessWidget {
-  const DrawerScreen({Key? key}) : super(key: key);
+  DrawerScreen({Key? key}) : super(key: key);
+
+  bool switchValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +21,14 @@ class DrawerScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 64),
               child: Text(
                 'Task Drawer',
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .headline5,
+                style: Theme.of(context).textTheme.headline5,
               ),
             ),
             BlocBuilder<TasksBloc, TasksState>(
               builder: (context, state) {
                 return GestureDetector(
-                  onTap: () => Navigator.of(context).pushNamed(TasksScreen.id),
+                  onTap: () => Navigator.of(context)
+                      .pushReplacementNamed(TasksScreen.id),
                   child: ListTile(
                     leading: const Icon(Icons.folder_special),
                     title: const Text('My Tasks'),
@@ -42,7 +41,8 @@ class DrawerScreen extends StatelessWidget {
             BlocBuilder<TasksBloc, TasksState>(
               builder: (context, state) {
                 return GestureDetector(
-                  onTap: () => Navigator.of(context).pushNamed(RecycleBinScreen.id),
+                  onTap: () => Navigator.of(context)
+                      .pushReplacementNamed(RecycleBinScreen.id),
                   child: ListTile(
                     leading: const Icon(Icons.delete),
                     title: const Text('Bin'),
@@ -51,8 +51,20 @@ class DrawerScreen extends StatelessWidget {
                 );
               },
             ),
+            const Divider(),
+            BlocBuilder<SwitchBloc, SwitchState>(
+              builder: (context, state) {
+                return Switch(
+                  value: state.switchValue,
+                  onChanged: (newValue) {
+                    newValue
+                        ? context.read<SwitchBloc>().add(SwitchOnEvent())
+                        : context.read<SwitchBloc>().add(SwitchOffEvent());
+                  },
+                );
+              },
+            ),
           ],
-
         ),
       ),
     );
