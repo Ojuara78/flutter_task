@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../blocs/block_exports.dart';
 import '../widgets/tasks_list.dart';
-import 'drawer_screen.dart';
+import 'drawer_task_screen.dart';
 
 class RecycleBinScreen extends StatelessWidget {
   const RecycleBinScreen({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class RecycleBinScreen extends StatelessWidget {
               )
             ],
           ),
-          drawer: DrawerScreen(),
+          drawer: DrawerTaskScreen(),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

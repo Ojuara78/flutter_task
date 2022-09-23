@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tasks_bloc/screen/recyle_bin_screen.dart';
-import 'package:tasks_bloc/screen/tasks_screen.dart';
+import 'package:tasks_bloc/screen/tabs_screen.dart';
 
 import '../blocs/block_exports.dart';
 
-class DrawerScreen extends StatelessWidget {
-  DrawerScreen({Key? key}) : super(key: key);
+class DrawerTaskScreen extends StatelessWidget {
+  DrawerTaskScreen({Key? key}) : super(key: key);
 
   bool switchValue = false;
 
@@ -27,12 +27,11 @@ class DrawerScreen extends StatelessWidget {
             BlocBuilder<TasksBloc, TasksState>(
               builder: (context, state) {
                 return GestureDetector(
-                  onTap: () => Navigator.of(context)
-                      .pushReplacementNamed(TasksScreen.id),
+                  onTap: () => Navigator.of(context).pushReplacementNamed(TabsScreen.id),
                   child: ListTile(
                     leading: const Icon(Icons.folder_special),
-                    title: const Text('My Tasks'),
-                    trailing: Text(' ${state.allTasks.length} '),
+                    title: const Text('Pending Tasks'),
+                    trailing: Text(' ${state.pendingTasks.length} | ${state.completedTasks.length} '),
                   ),
                 );
               },
