@@ -53,16 +53,25 @@ class DrawerTaskScreen extends StatelessWidget {
             const Divider(),
             BlocBuilder<SwitchBloc, SwitchState>(
               builder: (context, state) {
-                return Switch(
-                  value: state.switchValue,
-                  onChanged: (newValue) {
-                    newValue
-                        ? context.read<SwitchBloc>().add(SwitchOnEvent())
-                        : context.read<SwitchBloc>().add(SwitchOffEvent());
-                  },
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('DarkMode: '),
+                      Switch(
+                        value: state.switchValue,
+                        onChanged: (newValue) {
+                          newValue
+                              ? context.read<SwitchBloc>().add(SwitchOnEvent())
+                              : context.read<SwitchBloc>().add(SwitchOffEvent());
+                        },),
+                    ],
+                  ),
                 );
               },
             ),
+            const Divider(),
           ],
         ),
       ),

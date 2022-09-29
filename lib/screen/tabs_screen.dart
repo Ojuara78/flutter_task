@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tasks_bloc/screen/drawer_task_screen.dart';
 import 'package:tasks_bloc/screen/peding_task_screen.dart';
 
-import '../widgets/add_task_screen.dart';
+import 'add_task_screen.dart';
 import 'completed_task_screen.dart';
 import 'favorite_task_screen.dart';
 
@@ -27,6 +27,7 @@ class _TabsScreenState extends State<TabsScreen> {
   _addTask(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (context) => SingleChildScrollView(
         child: Container(
           padding:
