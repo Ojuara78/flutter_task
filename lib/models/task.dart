@@ -13,7 +13,7 @@ class Task extends Equatable {
   Task({required this.title,required this.description, required this.id, this.isDone, this.isDeleted, this.isFavorite, required this.date,}) {
     isDone = isDone ?? false;
     isDeleted = isDeleted ?? false;
-    isDeleted = isFavorite ?? false;
+    isFavorite = isFavorite ?? false;
   }
 
   Task copyWith({

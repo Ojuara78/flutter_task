@@ -11,10 +11,12 @@ class TaskTile extends StatelessWidget {
   final Task task;
 
   void _removeOrDeleteTask(BuildContext context, Task task) {
+    Navigator.of(context).pop();
     task.isDeleted!
         ? context.read<TasksBloc>().add(DeleteTask(task: task))
         : context.read<TasksBloc>().add(RemoveTask(task: task));
   }
+
   void _editTask(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -30,10 +32,12 @@ class TaskTile extends StatelessWidget {
   }
 
   void _likeOrDislikeTask(BuildContext context, Task task){
+    Navigator.of(context).pop();
     context.read<TasksBloc>().add(MarkFavoriteOrUnfavoriteTask(task: task));
   }
 
   void _restoreTask(BuildContext context, Task task){
+    Navigator.of(context).pop();
     context.read<TasksBloc>().add(RestoreTask(task: task));
   }
 

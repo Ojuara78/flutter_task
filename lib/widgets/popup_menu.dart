@@ -23,7 +23,6 @@ class PopupMenu extends StatelessWidget {
         itemBuilder: task.isDeleted == false
             ? ((context) => [
                   PopupMenuItem(
-                    onTap: null,
                     child: TextButton.icon(
                       onPressed: editTaskCallback,
                       icon: const Icon(Icons.edit),
@@ -31,9 +30,8 @@ class PopupMenu extends StatelessWidget {
                     ),
                   ),
                   PopupMenuItem(
-                    onTap: () => likeOrDislikeCallback,
                     child: TextButton.icon(
-                      onPressed: null,
+                      onPressed: likeOrDislikeCallback,
                       icon: task.isFavorite == false
                           ? const Icon(Icons.bookmark_add_outlined)
                           : const Icon(Icons.bookmark_remove),
@@ -43,9 +41,8 @@ class PopupMenu extends StatelessWidget {
                     ),
                   ),
                   PopupMenuItem(
-                    onTap: () => cancelOrDeleteCallback, //_removeOrDeleteTask(context, task),
                     child: TextButton.icon(
-                      onPressed: null,
+                      onPressed: cancelOrDeleteCallback,
                       icon: const Icon(Icons.delete),
                       label: const Text('Delete'),
                     ),
@@ -53,19 +50,18 @@ class PopupMenu extends StatelessWidget {
                 ])
             : (context) => [
                   PopupMenuItem(
-                      child: TextButton.icon(
-                        onPressed: null,
-                        icon: const Icon(Icons.restore_from_trash),
-                        label: const Text('Restore'),
-                      ),
-                      onTap: restoreTaskCallback),
+                    child: TextButton.icon(
+                      onPressed: restoreTaskCallback,
+                      icon: const Icon(Icons.restore_from_trash),
+                      label: const Text('Restore'),
+                    ),
+                  ),
                   PopupMenuItem(
                     child: TextButton.icon(
-                      onPressed: null,
+                      onPressed: cancelOrDeleteCallback,
                       icon: const Icon(Icons.delete_forever),
                       label: const Text('Delete Forever'),
                     ),
-                    onTap: () => cancelOrDeleteCallback,
                   ),
                 ]);
   }
